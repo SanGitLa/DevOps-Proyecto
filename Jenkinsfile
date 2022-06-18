@@ -4,19 +4,6 @@ pipeline {
         maven "M3_8_6"
          }
     stages {
-       stage('Validate'){
-            steps {
-                dir("Servicios/Curso-Microservicios"){
-                    withSonarQubeEnv('SonarServer'){
-                        sh "mvn clean package sonar:sonar \
-                            -Dsonar.projectKey=22_MyCompany_Microservice \
-                            -Dsonar.projectName=22_MyCompany_Microservice \
-                            -Dsonar.sources=src/main \
-                            -Dsonar.coverage.exclusions=**/*TO.java,**/*DO.java,**/curso/web/**/*,**/curso/persistence/**/*,**/curso/commons/**/*,**/curso/model/**/* "
-                    }
-                }
-            }
-        }
 
         stage('Compile') {
             steps {
@@ -26,9 +13,12 @@ pipeline {
                 
             }
         }
-          stage('DBDeploy') {
+          stage('Push Image') {
             steps {
-                sh  "docker images"
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker_nexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                    sh 'docker push microservicio:latest'
+                }
             }  
         }
     }

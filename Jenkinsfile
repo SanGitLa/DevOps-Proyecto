@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        naven 'M_3_8_6'
+     }
     stages {
         stage ('Validate'){
             steps {

@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker_nexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                     sh 'docker login 192.168.100.163:8083 -u $USERNAME -p $PASSWORD'
-                    sh 'docker push microservicio:latest'
+                    sh 'docker push 192.168.100.163:8081/repository/docker-private/:latest'
                 }
             }  
         }

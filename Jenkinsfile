@@ -8,8 +8,6 @@ pipeline {
             steps {
                 dir ("Servicios/Curso-Microservicios"){
                     withSonarQubeEnv('SonarServer'){ 
-                        dir("Servicios/Curso-Microservicios"){
-                    withSonarQubeEnv('SonarServer'){
                         sh "mvn clean package sonar:sonar \
                             -Dsonar.projectKey=22_MyCompany_Microservice \
                             -Dsonar.projectName=22_MyCompany_Microservice \

@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        naven "M3_8_6"
+        maven "M3_8_6"
          }
     stages {
         stage ('Validate'){

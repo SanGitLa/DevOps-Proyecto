@@ -6,5 +6,5 @@ RUN ["mvn", "clean", "package"]
 
 
 FROM amazoncorretto:8
-COPY microservicio-web/target/microservicio-web-1.0-SNAPSHOT.jar app.jar
+COPY --from=builder /workspace/app/microservicio-web/target/microservicio-web-1.0-SNAPSHOT.jar app.jar
 CMD ["java", "-jar", "app.jar"]

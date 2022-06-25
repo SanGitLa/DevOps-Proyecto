@@ -22,7 +22,7 @@ pipeline {
                 }
             }  
         }
-    stage('Compile') {
+    stage('Database') {
             steps {
                 dir ("Liquibase/"){
                     sh '/opt/liquibase/liquibase --changeLogFile="changesets/db.changelog-master.xml" update'
